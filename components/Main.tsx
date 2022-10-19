@@ -1,34 +1,40 @@
-import React, {useState, useEffect} from 'react'
-import Image from 'next/image'
-import {Movie} from '../types'
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { Movie } from "../types";
 
 interface Props {
-    main: Movie[]
-  }
-
-const Main = ({main}: Props) => {
-    // console.log(main)
-    const [data, setData] = useState<Movie | null>(null)
-    useEffect(()=> {
-        setData(main[Math.floor(Math.random()* main.length)])
-        console.log(data)
-    },[main])
-    console.log(data)
-  return (
-    <div className='h-[93vh]'>
-        <div className='absolute top-0 left-0 w-[100%] h-full -z-10 bg-center'>
-            <Image
-                objectFit='cover'
-                layout='fill'
-                src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
-            />
-        </div>
-        <div className='p-4 text-white font-main pt-[30rem]'>
-                <h1 className='text-4xl pb-4 lg:text-6xl'>{data?.title || data?.name || data?.original_name}</h1>
-                <h1 className='lg:text-xl w-1/2'>{data?.overview}</h1>
-        </div>
-    </div>
-  )
+  main: Movie[];
 }
 
-export default Main
+const Main = ({ main }: Props) => {
+  // console.log(main)
+  const [data, setData] = useState<Movie | null>(null);
+  useEffect(() => {
+    setData(main[Math.floor(Math.random() * main.length)]);
+    console.log(data);
+  }, [main]);
+  console.log(data);
+  return (
+    <div className="flex h-screen w-screen flex-col justify-between">
+      <div className="absolute top-0 left-0 flex h-1/6 w-full items-center p-8">
+        <h1 className="font-main text-2xl text-white">YoursCinema</h1>
+      </div>
+      <div className="-z-10 h-full w-full sm:hidden ">
+        <Image
+          src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
+      <div className="-z-10 hidden h-full w-full sm:block ">
+        <Image
+          src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
+          layout="fill"
+          objectFit="cover"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Main;
