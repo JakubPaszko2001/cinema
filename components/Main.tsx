@@ -7,11 +7,9 @@ interface Props {
 }
 
 const Main = ({ main }: Props) => {
-  // console.log(main)
   const [data, setData] = useState<Movie | null>(null);
   useEffect(() => {
     setData(main[Math.floor(Math.random() * main.length)]);
-    console.log(data);
   }, [main]);
   console.log(data);
   return (
@@ -32,6 +30,10 @@ const Main = ({ main }: Props) => {
           layout="fill"
           objectFit="cover"
         />
+      </div>
+      <div className="absolute bottom-[15rem] left-0 hidden max-w-[60rem] rounded-lg p-8 text-white sm:block">
+        <h1 className="mb-8 font-main text-6xl">{data?.title}</h1>
+        <h1 className="text-2xl">{data?.overview}</h1>
       </div>
     </div>
   );
