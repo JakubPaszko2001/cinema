@@ -1,6 +1,8 @@
 import React from "react";
 import { Movie } from "../types";
 import Image from "next/image";
+import { useRecoilState } from "recoil";
+import { modalState, movieState } from "../atoms/modalAtom";
 
 interface Props {
   main: Movie[];
@@ -8,6 +10,8 @@ interface Props {
 
 const Movies = ({ main }: Props) => {
   console.log(main);
+  const [showModal, setShowModal] = useRecoilState(modalState);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
@@ -22,11 +26,16 @@ const Movies = ({ main }: Props) => {
                   src={`https://image.tmdb.org/t/p/original${item?.poster_path}`}
                   layout="fill"
                   objectFit="contain"
-                  className="hover:scale-110"
                 />
               </div>
               <div className="flex h-[5rem] w-full items-center justify-center">
-                <div className="mr-2 flex h-[2rem] w-[5rem] items-center justify-center rounded-full bg-black text-white">
+                <div
+                  className="mr-2 flex h-[2rem] w-[5rem] cursor-pointer items-center justify-center rounded-full bg-black text-white"
+                  onClick={() => {
+                    // setCurrentMovie(movie);
+                    setShowModal(true);
+                  }}
+                >
                   trailler
                 </div>
                 <div className="ml-2 flex h-[2rem] w-[5rem] items-center justify-center rounded-full bg-black text-white">
