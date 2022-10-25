@@ -1,6 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useRecoilValue } from "recoil";
+import { modalState } from "../atoms/modalAtom";
 import Main from "../components/Main";
+import Modal from "../components/Modal";
 import Movies from "../components/Movies";
 import { Movie } from "../types";
 
@@ -9,7 +12,7 @@ interface Props {
 }
 
 const Home = ({ main }: Props) => {
-  // console.log(main)
+  const showModal = useRecoilValue(modalState);
   return (
     <div className="">
       <Head>
@@ -20,6 +23,7 @@ const Home = ({ main }: Props) => {
       <div className="overflow-hidden">
         <Main main={main} />
         <Movies main={main} />
+        {showModal && <Modal />}
       </div>
     </div>
   );
