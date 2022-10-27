@@ -9,9 +9,9 @@ interface Props {
 }
 
 const Movies = ({ main }: Props) => {
-  console.log(main);
+  // console.log(main);
   const [showModal, setShowModal] = useRecoilState(modalState);
-  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
+  const [movieCurrent, setMovieCurrent] = useRecoilState(movieState);
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
@@ -32,7 +32,7 @@ const Movies = ({ main }: Props) => {
                 <div
                   className="mr-2 flex h-[2rem] w-[5rem] cursor-pointer items-center justify-center rounded-full bg-black text-white"
                   onClick={() => {
-                    // setCurrentMovie(movie);
+                    setMovieCurrent(item.id);
                     setShowModal(true);
                   }}
                 >

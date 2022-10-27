@@ -11,7 +11,7 @@ const Main = ({ main }: Props) => {
   useEffect(() => {
     setData(main[Math.floor(Math.random() * main.length)]);
   }, [main]);
-  console.log(data);
+  // console.log(data);
   return (
     <div className="flex h-screen w-screen flex-col justify-between">
       <div className="absolute top-0 left-0 flex h-1/6 w-full items-center p-8">
