@@ -17,7 +17,7 @@ const Main = ({ main }: Props) => {
       <div className="absolute top-0 left-0 flex h-1/6 w-full items-center p-8">
         <h1 className="font-main text-2xl text-white">YoursCinema</h1>
       </div>
-      <div className="-z-10 h-full w-full sm:hidden ">
+      <div className="relative -z-10 h-full w-full sm:hidden ">
         <Image
           src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
           layout="fill"

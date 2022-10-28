@@ -3,6 +3,7 @@ import { Movie } from "../types";
 import Image from "next/image";
 import { useRecoilState } from "recoil";
 import { modalState, movieState } from "../atoms/modalAtom";
+import Link from "next/link";
 
 interface Props {
   main: Movie[];
@@ -20,7 +21,7 @@ const Movies = ({ main }: Props) => {
       <div className="grid w-screen grid-cols-1 items-center justify-center gap-4 p-4 md:grid-cols-2 lg:grid-cols-3">
         {main.map((item) => {
           return (
-            <div className="flex flex-col">
+            <div key={item.id} className="flex flex-col">
               <div className="relative flex min-h-[25rem] min-w-[20rem]">
                 <Image
                   src={`https://image.tmdb.org/t/p/original${item?.poster_path}`}
@@ -38,9 +39,11 @@ const Movies = ({ main }: Props) => {
                 >
                   trailler
                 </div>
-                <div className="ml-2 flex h-[2rem] w-[5rem] items-center justify-center rounded-full bg-black text-white">
-                  book
-                </div>
+                <Link href={`/movie/${item.id}`}>
+                  <div className="ml-2 flex h-[2rem] w-[5rem] cursor-pointer items-center justify-center rounded-full bg-black text-white">
+                    book
+                  </div>
+                </Link>
               </div>
             </div>
           );
