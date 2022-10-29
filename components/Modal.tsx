@@ -9,7 +9,7 @@ const Modal = () => {
   const [showModal, setShowModal] = useRecoilState(modalState);
   const [movieCurrent, setMovieCurrent] = useRecoilState(movieState);
   const [trailer, setTrailer] = useState("");
-  const [info, setInfo] = useState();
+  const [info, setInfo] = useState<Movie | null>();
   console.log(info);
   useEffect(() => {
     if (!movieCurrent) return;
