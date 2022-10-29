@@ -7,6 +7,20 @@ import Modal from "../components/Modal";
 import Movies from "../components/Movies";
 import { Movie } from "../types";
 
+export async function getServerSideProps() {
+  const response = await fetch(
+    "https://api.themoviedb.org/3/discover/movie?api_key=202c50b1e2676a320151967e42b9cc3b&language=en-US&with_genres=28"
+  );
+  const data = await response.json();
+  const { results } = data;
+
+  return {
+    props: {
+      main: results,
+    },
+  };
+}
+
 interface Props {
   main: Movie[];
 }
@@ -30,16 +44,3 @@ const Home = ({ main }: Props) => {
 };
 
 export default Home;
-export async function getServerSideProps() {
-  const response = await fetch(
-    "https://api.themoviedb.org/3/discover/movie?api_key=202c50b1e2676a320151967e42b9cc3b&language=en-US&with_genres=28"
-  );
-  const data = await response.json();
-  const { results } = data;
-
-  return {
-    props: {
-      main: results,
-    },
-  };
-}
