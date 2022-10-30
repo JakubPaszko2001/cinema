@@ -1,0 +1,132 @@
+{
+  "firstRow": [
+    {
+      "id": 1,
+      "reserved": false
+    },
+    {
+      "id": 2,
+      "reserved": false
+    },
+    {
+      "id": 3,
+      "reserved": false
+    },
+    {
+      "id": 4,
+      "reserved": false
+    },
+    {
+      "id": 5,
+      "reserved": false
+    },
+    {
+      "id": 6,
+      "reserved": false
+    }
+  ],
+  "secondRow": [
+    {
+      "id": 1,
+      "reserved": false
+    },
+    {
+      "id": 2,
+      "reserved": false
+    },
+    {
+      "id": 3,
+      "reserved": false
+    },
+    {
+      "id": 4,
+      "reserved": false
+    },
+    {
+      "id": 5,
+      "reserved": false
+    },
+    {
+      "id": 6,
+      "reserved": false
+    }
+  ],
+  "thirdRow": [
+    {
+      "id": 1,
+      "reserved": false
+    },
+    {
+      "id": 2,
+      "reserved": false
+    },
+    {
+      "id": 3,
+      "reserved": false
+    },
+    {
+      "id": 4,
+      "reserved": false
+    },
+    {
+      "id": 5,
+      "reserved": false
+    },
+    {
+      "id": 6,
+      "reserved": false
+    }
+  ],
+  "fourthRow": [
+    {
+      "id": 1,
+      "reserved": false
+    },
+    {
+      "id": 2,
+      "reserved": false
+    },
+    {
+      "id": 3,
+      "reserved": false
+    },
+    {
+      "id": 4,
+      "reserved": false
+    },
+    {
+      "id": 5,
+      "reserved": false
+    },
+    {
+      "id": 6,
+      "reserved": false
+    }
+  ],
+  "fifthRow": [
+    {
+      "id": 1,
+      "reserved": false
+    },
+    {
+      "id": 2,
+      "reserved": false
+    },
+    {
+      "id": 3,
+      "reserved": false
+    },
+    {
+      "id": 4,
+      "reserved": false
+    },
+    {
+      "id": 5,
+      "reserved": false
+    },
+    {
+      "id": 6,
+      "reserved": false
+    }
+  ]
+}
