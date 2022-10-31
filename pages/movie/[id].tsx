@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Movie } from "../../types";
 import Image from "next/image";
+import seatsJSON from "../movie/seats.json";
 export async function getServerSideProps({ query }: any) {
   const { id } = query;
   const res = await fetch(
@@ -19,6 +20,8 @@ interface Props {
 }
 
 const Details = ({ data }: Props) => {
+  const [seats, setSeats] = useState(seatsJSON);
+  console.log(seats);
   return (
     <div className="h-full w-full">
       <div className="h-24 w-full bg-black"></div>
@@ -32,6 +35,7 @@ const Details = ({ data }: Props) => {
               src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
               layout="fill"
               objectFit="contain"
+              alt={data?.title}
             />
           </div>
           <div className="my-4 flex w-full flex-col items-center justify-center">
@@ -52,6 +56,53 @@ const Details = ({ data }: Props) => {
           <div className="flex w-full flex-col items-center justify-center">
             <div className="left-0 right-0 mx-auto h-4 w-3/4 rounded-full bg-black"></div>
             <h1>screen</h1>
+          </div>
+          <div className="mb-2 flex flex-col">
+            <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
+              {seats.firstRow.map((item) => {
+                return (
+                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                    {item.id}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
+              {seats.secondRow.map((item) => {
+                return (
+                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                    {item.id}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
+              {seats.thirdRow.map((item) => {
+                return (
+                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                    {item.id}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
+              {seats.fourthRow.map((item) => {
+                return (
+                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                    {item.id}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
+              {seats.fifthRow.map((item) => {
+                return (
+                  <div className="h-6 w-6 cursor-pointer bg-red-500">
+                    {item.id}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

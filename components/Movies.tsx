@@ -27,6 +27,7 @@ const Movies = ({ main }: Props) => {
                   src={`https://image.tmdb.org/t/p/original${item?.poster_path}`}
                   layout="fill"
                   objectFit="contain"
+                  alt={item?.title}
                 />
               </div>
               <div className="flex h-[5rem] w-full items-center justify-center">

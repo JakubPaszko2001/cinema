@@ -22,6 +22,7 @@ const Main = ({ main }: Props) => {
           src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
           layout="fill"
           objectFit="cover"
+          alt={data?.title}
         />
       </div>
       <div className="-z-10 hidden h-full w-full sm:block ">
@@ -29,6 +30,7 @@ const Main = ({ main }: Props) => {
           src={`https://image.tmdb.org/t/p/original${data?.backdrop_path}`}
           layout="fill"
           objectFit="cover"
+          alt={data?.title}
         />
       </div>
       <div className="absolute bottom-[15rem] left-0 hidden max-w-[60rem] rounded-lg p-8 text-white sm:block">
