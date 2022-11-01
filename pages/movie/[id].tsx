@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Movie } from "../../types";
+import { Movie, Data } from "../../types";
 import Image from "next/image";
 import seatsJSON from "../movie/seats.json";
 export async function getServerSideProps({ query }: any) {
@@ -15,11 +15,15 @@ export async function getServerSideProps({ query }: any) {
   };
 }
 
+interface Data {
+  data: string;
+}
+
 interface Props {
   data: Movie[];
 }
 
-const Details = ({ data }: Props) => {
+const Details = ({ data }: Data | Props | Movie) => {
   const [seats, setSeats] = useState(seatsJSON);
   console.log(seats);
   return (

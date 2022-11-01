@@ -3,6 +3,10 @@ export interface Genre {
   name: string;
 }
 
+export interface Data {
+  data: string;
+}
+
 export interface Movie {
   title: string;
   backdrop_path: string;
@@ -23,11 +27,5 @@ export interface Movie {
 }
 
 export interface Element {
-  type:
-    | "Bloopers"
-    | "Featurette"
-    | "Behind the Scenes"
-    | "Clip"
-    | "Trailer"
-    | "Teaser";
+  type: "Trailer";
 }
