@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Movie, Data } from "../../types";
+import { Movie } from "../../types";
 import Image from "next/image";
 import seatsJSON from "../movie/seats.json";
 export async function getServerSideProps({ query }: any) {
@@ -15,17 +15,15 @@ export async function getServerSideProps({ query }: any) {
   };
 }
 
-interface Data {
-  data: string;
-}
-
 interface Props {
   data: Movie[];
 }
 
-const Details = ({ data }: Data | Props | Movie) => {
+const Details = ({ data }: Props) => {
   const [seats, setSeats] = useState(seatsJSON);
-  console.log(seats);
+  // console.log(seats);
+  const { firstRow } = seats;
+  // console.log(firstRow);
   return (
     <div className="h-full w-full">
       <div className="h-24 w-full bg-black"></div>
@@ -65,7 +63,15 @@ const Details = ({ data }: Data | Props | Movie) => {
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
               {seats.firstRow.map((item) => {
                 return (
-                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                  <div
+                    onClick={() => {
+                      item.reserved = !item.reserved;
+                      console.log(item.reserved);
+                    }}
+                    className={`mb-2 h-6 w-6 cursor-pointer ${
+                      item.reserved ? "bg-green-500" : "bg-yellow-500"
+                    }`}
+                  >
                     {item.id}
                   </div>
                 );

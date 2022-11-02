@@ -3,10 +3,6 @@ export interface Genre {
   name: string;
 }
 
-export interface Data {
-  data: string;
-}
-
 export interface Movie {
   title: string;
   backdrop_path: string;
