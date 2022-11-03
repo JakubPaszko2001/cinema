@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Movie } from "../../types";
 import Image from "next/image";
 import seatsJSON from "../movie/seats.json";
 import Link from "next/link";
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query }: data) {
   const { id } = query;
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=202c50b1e2676a320151967e42b9cc3b&language=en-US&append_to_response=videos`
@@ -16,21 +15,56 @@ export async function getServerSideProps({ query }) {
   };
 }
 
-interface Props {
-  data: Movie[];
+interface storage {
+  firstRow: { id: number; reserved: boolean };
+  secondRow: { id: number; reserved: boolean };
+  thirdRow: { id: number; reserved: boolean };
+  fourthRow: { id: number; reserved: boolean };
+  fifthRow: { id: number; reserved: boolean };
 }
 
-const Details = ({ data }: Props) => {
+interface data {
+  query: data;
+  data: data;
+  title: string;
+  backdrop_path: string;
+  media_type?: string;
+  release_date?: string;
+  first_air_date: string;
+  genre_ids: number[];
+  id: number;
+  name: string;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  vote_average: number;
+  vote_count: number;
+  runtime: string;
+  production_countries: string;
+}
+
+const Details = ({ data }: data) => {
   const [seats, setSeats] = useState(seatsJSON);
   const x = JSON.stringify(seats);
+  const [movieData, setMovieData] = useState<storage | null>();
 
   useEffect(() => {
     if (localStorage.getItem(`${data.id}`) === null) {
       localStorage.setItem(`${data.id}`, x);
+      const u: storage = JSON.parse(localStorage.getItem(`${data.id}`));
+      setMovieData(u);
+      console.log(movieData);
+    } else {
+      let y: storage = JSON.parse(localStorage.getItem(`${data.id}`));
+      // console.log(y);
+      setMovieData(y);
+      console.log(movieData);
     }
   }, []);
 
-  console.log(seats);
   return (
     <div className="h-full w-full">
       <div className="flex h-24 w-full items-center pl-2">
@@ -78,7 +112,7 @@ const Details = ({ data }: Props) => {
                 return (
                   <div
                     onClick={() => {
-                      console.log(seats);
+                      console.log(movieData?.firstRow);
                     }}
                     className={`mb-2 h-6 w-6 cursor-pointer`}
                     style={{
@@ -95,7 +129,11 @@ const Details = ({ data }: Props) => {
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
               {seats.secondRow.map((item) => {
                 return (
-                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                  <div
+                    className={`mb-2 h-6 w-6 cursor-pointer ${
+                      item.reserved === false ? "bg-blue-500" : "bg-green-500"
+                    }`}
+                  >
                     {item.id}
                   </div>
                 );
