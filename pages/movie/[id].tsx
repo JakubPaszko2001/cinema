@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Movie } from "../../types";
 import Image from "next/image";
 import seatsJSON from "../movie/seats.json";
-export async function getServerSideProps({ query }: any) {
+import Link from "next/link";
+export async function getServerSideProps({ query }) {
   const { id } = query;
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=202c50b1e2676a320151967e42b9cc3b&language=en-US&append_to_response=videos`
@@ -21,12 +22,24 @@ interface Props {
 
 const Details = ({ data }: Props) => {
   const [seats, setSeats] = useState(seatsJSON);
-  // console.log(seats);
-  const { firstRow } = seats;
-  // console.log(firstRow);
+  const x = JSON.stringify(seats);
+
+  useEffect(() => {
+    if (localStorage.getItem(`${data.id}`) === null) {
+      localStorage.setItem(`${data.id}`, x);
+    }
+  }, []);
+
+  console.log(seats);
   return (
     <div className="h-full w-full">
-      <div className="h-24 w-full bg-black"></div>
+      <div className="flex h-24 w-full items-center pl-2">
+        <Link href={`/`}>
+          <div className="cursor-pointer rounded-full bg-black p-2 text-white">
+            ← Go back
+          </div>
+        </Link>
+      </div>
       <div className="w-full">
         <div className="flex flex-col">
           <div className="left-0 right-0 mx-auto my-4">
@@ -65,12 +78,14 @@ const Details = ({ data }: Props) => {
                 return (
                   <div
                     onClick={() => {
-                      item.reserved = !item.reserved;
-                      console.log(item.reserved);
+                      console.log(seats);
                     }}
-                    className={`mb-2 h-6 w-6 cursor-pointer ${
-                      item.reserved ? "bg-green-500" : "bg-yellow-500"
-                    }`}
+                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    style={{
+                      backgroundColor: `${
+                        item.reserved === true ? "green" : "yellow"
+                      }`,
+                    }}
                   >
                     {item.id}
                   </div>

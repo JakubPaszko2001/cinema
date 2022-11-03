@@ -2,7 +2,7 @@
   "firstRow": [
     {
       "id": 1,
-      "reserved": true
+      "reserved": false
     },
     {
       "id": 2,
