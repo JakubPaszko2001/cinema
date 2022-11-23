@@ -43,28 +43,29 @@ interface data {
   vote_average: number;
   vote_count: number;
   runtime: string;
-  production_countries: string;
+  production_countries: string[];
 }
 
 const Details = ({ data }: data) => {
   const [seats, setSeats] = useState(seatsJSON);
   const x = JSON.stringify(seats);
-  const [movieData, setMovieData] = useState<storage | null>();
+  const [movieData, setMovieData] = useState<storage[] | any>();
+  const [emptyArray, setEmptyArray] = useState();
 
   useEffect(() => {
     if (localStorage.getItem(`${data.id}`) === null) {
       localStorage.setItem(`${data.id}`, x);
-      const u: storage = JSON.parse(localStorage.getItem(`${data.id}`));
+      const u = JSON.parse(localStorage.getItem(`${data.id}`));
       setMovieData(u);
       console.log(movieData);
     } else {
-      let y: storage = JSON.parse(localStorage.getItem(`${data.id}`));
+      let y = JSON.parse(localStorage.getItem(`${data.id}`));
       // console.log(y);
       setMovieData(y);
-      console.log(movieData);
+      // console.log(movieData);
     }
   }, []);
-
+  // console.log(data);
   return (
     <div className="h-full w-full">
       <div className="flex h-24 w-full items-center pl-2">
@@ -108,11 +109,13 @@ const Details = ({ data }: data) => {
           </div>
           <div className="mb-2 flex flex-col">
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {seats.firstRow.map((item) => {
+              {movieData?.firstRow.map((item) => {
                 return (
                   <div
                     onClick={() => {
-                      console.log(movieData?.firstRow);
+                      // console.log(movieData?.firstRow);
+                      item.reserved = !item.reserved;
+                      // console.log(movieData?.firstRow);
                     }}
                     className={`mb-2 h-6 w-6 cursor-pointer`}
                     style={{
@@ -127,12 +130,20 @@ const Details = ({ data }: data) => {
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {seats.secondRow.map((item) => {
+              {movieData?.secondRow.map((item) => {
                 return (
                   <div
-                    className={`mb-2 h-6 w-6 cursor-pointer ${
-                      item.reserved === false ? "bg-blue-500" : "bg-green-500"
-                    }`}
+                    onClick={() => {
+                      // console.log(movieData?.firstRow);
+                      item.reserved = !item.reserved;
+                      // console.log(movieData?.firstRow);
+                    }}
+                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    style={{
+                      backgroundColor: `${
+                        item.reserved === true ? "green" : "yellow"
+                      }`,
+                    }}
                   >
                     {item.id}
                   </div>
@@ -140,27 +151,63 @@ const Details = ({ data }: data) => {
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {seats.thirdRow.map((item) => {
+              {movieData?.thirdRow.map((item) => {
                 return (
-                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                  <div
+                    onClick={() => {
+                      // console.log(movieData?.firstRow);
+                      item.reserved = !item.reserved;
+                      // console.log(movieData?.firstRow);
+                    }}
+                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    style={{
+                      backgroundColor: `${
+                        item.reserved === true ? "green" : "yellow"
+                      }`,
+                    }}
+                  >
                     {item.id}
                   </div>
                 );
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {seats.fourthRow.map((item) => {
+              {movieData?.fourthRow.map((item) => {
                 return (
-                  <div className="mb-2 h-6 w-6 cursor-pointer bg-red-500">
+                  <div
+                    onClick={() => {
+                      // console.log(movieData?.firstRow);
+                      item.reserved = !item.reserved;
+                      // console.log(movieData?.firstRow);
+                    }}
+                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    style={{
+                      backgroundColor: `${
+                        item.reserved === true ? "green" : "yellow"
+                      }`,
+                    }}
+                  >
                     {item.id}
                   </div>
                 );
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {seats.fifthRow.map((item) => {
+              {movieData?.fifthRow.map((item) => {
                 return (
-                  <div className="h-6 w-6 cursor-pointer bg-red-500">
+                  <div
+                    onClick={() => {
+                      // console.log(movieData?.firstRow);
+                      item.reserved = !item.reserved;
+                      // console.log(movieData?.firstRow);
+                    }}
+                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    style={{
+                      backgroundColor: `${
+                        item.reserved === true ? "green" : "yellow"
+                      }`,
+                    }}
+                  >
                     {item.id}
                   </div>
                 );
@@ -168,6 +215,17 @@ const Details = ({ data }: data) => {
             </div>
           </div>
         </div>
+        <button
+          onClick={() => {
+            console.log(movieData);
+            const sendReserved = JSON.stringify(movieData);
+            localStorage.setItem(`${data.id}`, sendReserved);
+            document.location.reload();
+          }}
+          className="bg-black text-white"
+        >
+          hello
+        </button>
       </div>
     </div>
   );
