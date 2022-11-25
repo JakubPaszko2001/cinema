@@ -24,6 +24,11 @@ interface storage {
   fifthRow: { id: number; reserved: boolean };
 }
 
+interface item {
+  id: number;
+  reserved: boolean;
+}
+
 interface data {
   query: data;
   data: data;
@@ -44,7 +49,7 @@ interface data {
   vote_average: number;
   vote_count: number;
   runtime: string;
-  production_countries: string[];
+  production_countries: { name: string; iso_3166_1: string };
 }
 
 const Details = ({ data }: data) => {
@@ -56,11 +61,11 @@ const Details = ({ data }: data) => {
   useEffect(() => {
     if (localStorage.getItem(`${data.id}`) === null) {
       localStorage.setItem(`${data.id}`, x);
-      const u = JSON.parse(localStorage.getItem(`${data.id}`));
+      const u = JSON.parse(localStorage.getItem(`${data.id}`) || "");
       setMovieData(u);
       console.log(movieData);
     } else {
-      let y = JSON.parse(localStorage.getItem(`${data.id}`));
+      let y = JSON.parse(localStorage.getItem(`${data.id}`) || "");
       // console.log(y);
       setMovieData(y);
       // console.log(movieData);
@@ -128,9 +133,10 @@ const Details = ({ data }: data) => {
           </div>
           <div className="flex flex-col">
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {movieData?.firstRow.map((item) => {
+              {movieData?.firstRow.map((item: item) => {
                 return (
                   <MdChair
+                    key={item.id}
                     onClick={() => {
                       var seat = document.getElementById(`firstRow${item.id}`);
                       if (seat?.style.color === "green") {
@@ -157,9 +163,10 @@ const Details = ({ data }: data) => {
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {movieData?.secondRow.map((item) => {
+              {movieData?.secondRow.map((item: item) => {
                 return (
                   <MdChair
+                    key={item.id}
                     onClick={() => {
                       var seat = document.getElementById(`secondRow${item.id}`);
                       if (seat?.style.color === "green") {
@@ -186,9 +193,10 @@ const Details = ({ data }: data) => {
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {movieData?.thirdRow.map((item) => {
+              {movieData?.thirdRow.map((item: item) => {
                 return (
                   <MdChair
+                    key={item.id}
                     onClick={() => {
                       var seat = document.getElementById(`thirdRow${item.id}`);
                       if (seat?.style.color === "green") {
@@ -215,9 +223,10 @@ const Details = ({ data }: data) => {
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {movieData?.fourthRow.map((item) => {
+              {movieData?.fourthRow.map((item: item) => {
                 return (
                   <MdChair
+                    key={item.id}
                     onClick={() => {
                       var seat = document.getElementById(`fourthRow${item.id}`);
                       if (seat?.style.color === "green") {
@@ -244,9 +253,10 @@ const Details = ({ data }: data) => {
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
-              {movieData?.fifthRow.map((item) => {
+              {movieData?.fifthRow.map((item: item) => {
                 return (
                   <MdChair
+                    key={item.id}
                     onClick={() => {
                       var seat = document.getElementById(`fifthRow${item.id}`);
                       if (seat?.style.color === "green") {

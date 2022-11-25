@@ -12,7 +12,7 @@ interface Props {
 const Movies = ({ main }: Props) => {
   // console.log(main);
   const [showModal, setShowModal] = useRecoilState(modalState);
-  const [movieCurrent, setMovieCurrent] = useRecoilState(movieState);
+  const [movieCurrent, setMovieCurrent] = useRecoilState<any>(movieState);
   return (
     <div className="w-screen">
       <div className="flex items-center justify-center">
