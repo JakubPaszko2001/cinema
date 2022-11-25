@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import seatsJSON from "../movie/seats.json";
 import Link from "next/link";
+import { MdChair } from "react-icons/md";
 export async function getServerSideProps({ query }: data) {
   const { id } = query;
   const res = await fetch(
@@ -66,6 +67,7 @@ const Details = ({ data }: data) => {
     }
   }, []);
   // console.log(data);
+
   return (
     <div className="h-full w-full">
       <div className="flex h-24 w-full items-center pl-2">
@@ -90,17 +92,34 @@ const Details = ({ data }: data) => {
           </div>
           <div className="my-4 flex w-full flex-col items-center justify-center">
             <h1 className="font-main text-xl">
-              Ocena {Math.floor(data?.vote_average * 10)}/100
+              Rating {Math.floor(data?.vote_average * 10)}/100
             </h1>
             <h1 className="font-main text-xl">
-              Produkcja: {data?.production_countries[0].name}/
+              Production: {data?.production_countries[0].name}/
               {data?.production_countries[0].iso_3166_1}
             </h1>
             <h1 className="font-main text-xl">
-              Data realizacji: {data?.release_date}
+              Completion date : {data?.release_date}
             </h1>
-            <h1 className="font-main text-xl">
-              Czas trwania: {data?.runtime} min
+            <h1 className="font-main text-xl">Duration: {data?.runtime} min</h1>
+            <h1 className="flex items-center justify-center font-main text-xl">
+              <MdChair style={{ color: "green", marginRight: "5px" }} /> - Free
+              <MdChair
+                style={{
+                  color: "red",
+                  marginRight: "5px",
+                  marginLeft: "10px",
+                }}
+              />
+              - Reserved
+              <MdChair
+                style={{
+                  color: "blue",
+                  marginRight: "5px",
+                  marginLeft: "10px",
+                }}
+              />
+              - Choosen
             </h1>
           </div>
           <div className="flex w-full flex-col items-center justify-center">
@@ -111,105 +130,127 @@ const Details = ({ data }: data) => {
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
               {movieData?.firstRow.map((item) => {
                 return (
-                  <div
+                  <MdChair
                     onClick={() => {
-                      // console.log(movieData?.firstRow);
-                      item.reserved = !item.reserved;
-                      // console.log(movieData?.firstRow);
+                      var seat = document.getElementById(`seat${item.id}`);
+                      if (seat?.style.color === "green") {
+                        seat.classList.toggle("!text-[blue]");
+                      }
+                      if (seat?.style.color === "blue") {
+                        item.reserved = !item.reserved;
+                      } else {
+                        return;
+                      }
                     }}
-                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    id={`seat${item.id}`}
+                    className={`mb-2 h-6 w-6`}
                     style={{
-                      backgroundColor: `${
-                        item.reserved === true ? "green" : "yellow"
+                      color: `${item.reserved === true ? "red" : "green"}`,
+                      cursor: `${
+                        item.reserved === true ? "default" : "pointer"
                       }`,
                     }}
                   >
                     {item.id}
-                  </div>
+                  </MdChair>
                 );
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
               {movieData?.secondRow.map((item) => {
                 return (
-                  <div
+                  <MdChair
                     onClick={() => {
-                      // console.log(movieData?.firstRow);
-                      item.reserved = !item.reserved;
-                      // console.log(movieData?.firstRow);
+                      if (item.reserved === false) {
+                        item.reserved = !item.reserved;
+                      } else {
+                        return;
+                      }
                     }}
-                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    className={`mb-2 h-6 w-6`}
                     style={{
-                      backgroundColor: `${
-                        item.reserved === true ? "green" : "yellow"
+                      color: `${item.reserved === true ? "red" : "green"}`,
+                      cursor: `${
+                        item.reserved === true ? "default" : "pointer"
                       }`,
                     }}
                   >
                     {item.id}
-                  </div>
+                  </MdChair>
                 );
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
               {movieData?.thirdRow.map((item) => {
                 return (
-                  <div
+                  <MdChair
                     onClick={() => {
-                      // console.log(movieData?.firstRow);
-                      item.reserved = !item.reserved;
-                      // console.log(movieData?.firstRow);
+                      if (item.reserved === false) {
+                        item.reserved = !item.reserved;
+                      } else {
+                        return;
+                      }
                     }}
-                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    className={`mb-2 h-6 w-6`}
                     style={{
-                      backgroundColor: `${
-                        item.reserved === true ? "green" : "yellow"
+                      color: `${item.reserved === true ? "red" : "green"}`,
+                      cursor: `${
+                        item.reserved === true ? "default" : "pointer"
                       }`,
                     }}
                   >
                     {item.id}
-                  </div>
+                  </MdChair>
                 );
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
               {movieData?.fourthRow.map((item) => {
                 return (
-                  <div
+                  <MdChair
                     onClick={() => {
-                      // console.log(movieData?.firstRow);
-                      item.reserved = !item.reserved;
-                      // console.log(movieData?.firstRow);
+                      if (item.reserved === false) {
+                        item.reserved = !item.reserved;
+                      } else {
+                        return;
+                      }
                     }}
-                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    className={`mb-2 h-6 w-6`}
                     style={{
-                      backgroundColor: `${
-                        item.reserved === true ? "green" : "yellow"
+                      color: `${item.reserved === true ? "red" : "green"}`,
+                      cursor: `${
+                        item.reserved === true ? "default" : "pointer"
                       }`,
                     }}
                   >
                     {item.id}
-                  </div>
+                  </MdChair>
                 );
               })}
             </div>
             <div className="mx-auto flex w-3/4 flex-row items-center justify-around">
               {movieData?.fifthRow.map((item) => {
                 return (
-                  <div
+                  <MdChair
+                    type="checkbox"
+                    id="myCheck"
                     onClick={() => {
-                      // console.log(movieData?.firstRow);
-                      item.reserved = !item.reserved;
-                      // console.log(movieData?.firstRow);
+                      if (item.reserved === false) {
+                        item.reserved = !item.reserved;
+                      } else {
+                        return;
+                      }
                     }}
-                    className={`mb-2 h-6 w-6 cursor-pointer`}
+                    className={`mb-2 h-6 w-6`}
                     style={{
-                      backgroundColor: `${
-                        item.reserved === true ? "green" : "yellow"
+                      color: `${item.reserved === true ? "red" : "green"}`,
+                      cursor: `${
+                        item.reserved === true ? "default" : "pointer"
                       }`,
                     }}
                   >
                     {item.id}
-                  </div>
+                  </MdChair>
                 );
               })}
             </div>
@@ -222,9 +263,9 @@ const Details = ({ data }: data) => {
             localStorage.setItem(`${data.id}`, sendReserved);
             document.location.reload();
           }}
-          className="bg-black text-white"
+          className="cursor-pointer rounded-full bg-black p-2 text-white"
         >
-          hello
+          Book seat
         </button>
       </div>
     </div>
