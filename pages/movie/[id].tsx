@@ -3,7 +3,7 @@ import Image from "next/image";
 import seatsJSON from "../movie/seats.json";
 import Link from "next/link";
 import { MdChair } from "react-icons/md";
-export async function getServerSideProps({ query }: data) {
+export async function getServerSideProps({ query }: any) {
   const { id } = query;
   const res = await fetch(
     `https://api.themoviedb.org/3/movie/${id}?api_key=202c50b1e2676a320151967e42b9cc3b&language=en-US&append_to_response=videos`
@@ -30,26 +30,27 @@ interface item {
 }
 
 interface data {
-  query: data;
-  data: data;
-  title: string;
-  backdrop_path: string;
-  media_type?: string;
-  release_date?: string;
-  first_air_date: string;
-  genre_ids: number[];
-  id: number;
-  name: string;
-  origin_country: string[];
-  original_language: string;
-  original_name: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  vote_average: number;
-  vote_count: number;
-  runtime: string;
-  production_countries: { name: string; iso_3166_1: string };
+  data: {
+    query: data;
+    title: string;
+    backdrop_path: string;
+    media_type?: string;
+    release_date?: string;
+    first_air_date: string;
+    genre_ids: number[];
+    id: number;
+    name: string;
+    origin_country: string[];
+    original_language: string;
+    original_name: string;
+    overview: string;
+    popularity: number;
+    poster_path: string;
+    vote_average: number;
+    vote_count: number;
+    runtime: string;
+    production_countries: Array<{ name: string; iso_3166_1: string }>;
+  };
 }
 
 const Details = ({ data }: data) => {
@@ -57,6 +58,7 @@ const Details = ({ data }: data) => {
   const x = JSON.stringify(seats);
   const [movieData, setMovieData] = useState<storage[] | any>();
   const [emptyArray, setEmptyArray] = useState();
+  // console.log(data);
 
   useEffect(() => {
     if (localStorage.getItem(`${data.id}`) === null) {
