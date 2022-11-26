@@ -14,6 +14,7 @@ const Main = ({ main }: Props) => {
   // console.log(data);
   return (
     <div className="flex h-screen w-screen flex-col justify-between">
+      <div className="absolute bottom-0 h-[30rem] w-full bg-gradient-to-t from-black to-transparent"></div>
       <div className="absolute top-0 left-0 flex h-1/6 w-full items-center p-8">
         <h1 className="font-main text-2xl text-white">YoursCinema</h1>
       </div>
@@ -33,9 +34,9 @@ const Main = ({ main }: Props) => {
           alt={data?.title}
         />
       </div>
-      <div className="absolute bottom-[15rem] left-0 hidden max-w-[60rem] rounded-lg p-8 text-white sm:block">
-        <h1 className="mb-8 font-main text-6xl">{data?.title}</h1>
-        <h1 className="text-2xl">{data?.overview}</h1>
+      <div className="absolute bottom-[20%] left-0 hidden max-w-[60vw] rounded-r-3xl bg-black/40 p-8 text-white backdrop-blur-sm sm:block xl:max-w-[40vw]">
+        <h1 className="mb-8 font-main text-4xl xl:text-4xl">{data?.title}</h1>
+        <h1 className="text-xl xl:text-xl">{data?.overview}</h1>
       </div>
     </div>
   );
