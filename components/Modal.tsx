@@ -54,7 +54,7 @@ const Modal = () => {
             X
           </div>
         </div>
-        <div className="flex w-full flex-col bg-black pt-12 pb-12 font-main text-white">
+        <div className="flex w-full flex-col bg-white pt-12 pb-12 font-main text-black">
           <h1 className="ml-4 text-xl">{info?.title}</h1>
           <h1 className="ml-4 mr-4 mt-2">{info?.overview}</h1>
         </div>

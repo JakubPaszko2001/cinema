@@ -7,8 +7,8 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      main: ["Fjalla One","sans-serif"]
-    }
+      main: ["Roboto", "sans-serif"],
+    },
   },
   plugins: [],
-}
+};

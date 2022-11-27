@@ -30,17 +30,17 @@ const Movies = ({ main }: Props) => {
               </div>
               <div className="flex h-[5rem] w-full items-center justify-center">
                 <div
-                  className="flex w-1/5 cursor-pointer items-center justify-center border-2 text-white"
+                  className="flex cursor-pointer items-center justify-center rounded-sm bg-white px-6 py-2 font-main text-black hover:bg-[#FF4545]"
                   onClick={() => {
                     setMovieCurrent(item.id);
                     setShowModal(true);
                   }}
                 >
-                  trailler
+                  Trailler
                 </div>
                 <Link href={`/movie/${item.id}`}>
-                  <div className="flex w-1/5 cursor-pointer items-center justify-center border-2 text-white">
-                    book
+                  <div className="ml-2 flex cursor-pointer items-center justify-center rounded-sm bg-white px-6 py-2 font-main text-black hover:bg-[#FF4545]">
+                    Book ticket
                   </div>
                 </Link>
               </div>

@@ -16,7 +16,7 @@ const Main = ({ main }: Props) => {
     <div className="flex h-screen w-screen flex-col justify-between">
       <div className="absolute bottom-0 h-[30rem] w-full bg-gradient-to-t from-black to-transparent"></div>
       <div className="absolute top-0 left-0 flex h-1/6 w-full items-center p-8">
-        <h1 className="font-main text-2xl text-white">YoursCinema</h1>
+        <h1 className="font-main text-2xl text-white">TheCinema</h1>
       </div>
       <div className="relative -z-10 h-full w-full sm:hidden ">
         <Image

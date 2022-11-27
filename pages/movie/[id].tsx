@@ -57,9 +57,6 @@ const Details = ({ data }: data) => {
   const [seats, setSeats] = useState(seatsJSON);
   const x = JSON.stringify(seats);
   const [movieData, setMovieData] = useState<storage[] | any>();
-  const [emptyArray, setEmptyArray] = useState();
-  // console.log(data);
-
   useEffect(() => {
     if (localStorage.getItem(`${data.id}`) === null) {
       localStorage.setItem(`${data.id}`, x);
@@ -68,25 +65,21 @@ const Details = ({ data }: data) => {
       console.log(movieData);
     } else {
       let y = JSON.parse(localStorage.getItem(`${data.id}`) || "");
-      // console.log(y);
       setMovieData(y);
-      // console.log(movieData);
     }
   }, []);
-  // console.log(data);
-
   return (
-    <div className="w-screen">
-      <div className="flex h-24 w-full items-center pl-2">
+    <div className="w-screen bg-black">
+      <div className="flex h-24 w-full items-center">
         <Link href={`/`}>
-          <div className="cursor-pointer rounded-full bg-black p-2 text-white">
+          <div className="ml-2 cursor-pointer rounded-sm bg-white p-2 text-black">
             ← Go back
           </div>
         </Link>
       </div>
       <div className="w-screen">
         <div className="flex flex-col">
-          <div className="left-0 right-0 mx-auto my-4">
+          <div className="left-0 right-0 mx-auto">
             <h1 className="font-main text-xl">{data?.title}</h1>
           </div>
           <div className="relative h-80 w-full">
@@ -97,7 +90,7 @@ const Details = ({ data }: data) => {
               alt={data?.title}
             />
           </div>
-          <div className="my-4 flex w-full flex-col items-center justify-center">
+          <div className="my-4 flex w-full flex-col items-center justify-center text-white">
             <h1 className="font-main text-xl">
               Rating {Math.floor(data?.vote_average * 10)}/100
             </h1>
@@ -130,7 +123,7 @@ const Details = ({ data }: data) => {
             </h1>
           </div>
           <div className="flex w-full flex-col items-center justify-center">
-            <div className="left-0 right-0 mx-auto h-4 w-3/4 rounded-full bg-black"></div>
+            <div className="left-0 right-0 mx-auto h-4 w-3/4 rounded-full bg-white"></div>
             <h1>screen</h1>
           </div>
         </div>
@@ -284,7 +277,7 @@ const Details = ({ data }: data) => {
           localStorage.setItem(`${data.id}`, sendReserved);
           document.location.reload();
         }}
-        className="cursor-pointer rounded-full bg-black p-2 text-white"
+        className="ml-2 cursor-pointer rounded-sm bg-white p-2 text-black"
       >
         Book seat
       </button>
